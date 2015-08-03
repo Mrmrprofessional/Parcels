@@ -5,14 +5,18 @@ class Car
     public $price;
     public $miles;
 
- function __construct($make_model, $price, $miles)
+ function __construct($make_model, $price = null, $miles)
  {
    $this->make_model = $make_model;
    $this->price = $price;
    $this->miles = $miles;
- } 
+
+   if (is_null($price)){
+       $this->price = 50000;
+     }
  }
-$porsche = new Car("2014 Porsche 911", 114991, 7864);
+ }
+$porsche = new Car("2014 Porsche 911", null, 114991);
 //$porsche->make_model = "2014 Porsche 911";
 //$porsche->price = 114991;
 //$porsche->miles = 7864;
