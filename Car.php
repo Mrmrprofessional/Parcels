@@ -32,7 +32,7 @@ class Car
      return $this->miles;
    }
  }
-$porsche = new Car("pictures/porsche.jpg", "2014 Porsche 911", null, 114991);
+$porsche = new Car("pictures/porsche.jpg", "2014 Porsche 911", null, 7864);
 //$porsche->make_model = "2014 Porsche 911";
 //$porsche->price = 114991;
 //$porsche->miles = 7864;
@@ -57,9 +57,26 @@ $cars = array($porsche, $ford, $lexus,$mercedes);
 
 $cars_matching_search = array();
 foreach ($cars as $car) {
-  if ($car->getPrice() < $_GET["price"]){
-      array_push($cars_matching_search, $car);
+  if (empty($_GET["price"]))
+  {
+    if ($car->getMiles() < $_GET["mileage"])
+    {
+        array_push($cars_matching_search, $car);
+    }
+
   }
+    else if (empty($_GET["mileage"]))
+    {
+        if($car->getPrice() < $_GET["price"])
+        {
+            array_push($cars_matching_search, $car);
+        }
+
+    }
+    else if($car->getPrice() < $_GET["price"] && $car->getMiles() < $_GET["mileage"])
+    {
+      array_push($cars_matching_search, $car);
+    }
 }
 ?>
 
