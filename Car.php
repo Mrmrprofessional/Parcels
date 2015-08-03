@@ -1,9 +1,9 @@
 <?php
 class Car
 {
-    public $make_model;
-    public $price;
-    public $miles;
+    private $make_model;
+    private $price;
+    private $miles;
 
  function __construct($make_model, $price = null, $miles)
  {
@@ -14,6 +14,24 @@ class Car
    if (is_null($price)){
        $this->price = 50000;
      }
+ }
+
+ function setPrice($new_price){
+   $this->price = $new_price;
+ }
+
+ function getPrice(){
+   return $this->price;
+ }
+
+ function getModel()
+ {
+   return $this->make_model;
+ }
+
+ function getMiles()
+ {
+   return $this->miles;
  }
  }
 $porsche = new Car("2014 Porsche 911", null, 114991);
@@ -41,7 +59,7 @@ $cars = array($porsche, $ford, $lexus,$mercedes);
 
 $cars_matching_search = array();
 foreach ($cars as $car) {
-  if ($car->price < $_GET["price"]){
+  if ($car->getPrice() < $_GET["price"]){
       array_push($cars_matching_search, $car);
   }
 }
@@ -58,10 +76,13 @@ foreach ($cars as $car) {
     <ul>
       <?php
         foreach ($cars_matching_search as $car) {
-          echo "<li> $car->make_model </li>";
+          $car_model = $car->getModel();
+          $car_price = $car->getPrice();
+          $car_miles = $car->getMiles();
+          echo "<li> $car_model </li>";
           echo "<ul>";
-            echo "<li> $$car->price</li>";
-            echo "<li> Miles: $car->miles </li>";
+            echo "<li> $car_price </li>";
+            echo "<li> Miles: $car_miles </li>";
           echo "</ul>";
 
         }
